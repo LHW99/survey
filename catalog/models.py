@@ -5,18 +5,27 @@ from django.contrib.auth.models import User # lets us use user
 from datetime import date
 
 # Create your models here.
-class Answer(models.Model):
-  ans = models.CharField(max_length=200)
+class Answers(models.Model):
+  answer = models.CharField(max_length=200)
+  question = models.ForeignKey('Questions', on_delete=models.SET_NULL, null=True)
 
   def __str__(self):
     return self.name
 
 class Questions(models.Model):
-  ques = models.CharField(max_length=300)
+  question = models.CharField(max_length=300)
+  survey = models.ForeignKey('Surveys', on_delete=models.SET_NULL, null=True)
 
   def __str__(self):
     return self.name
 
-class Survey(models.Model):
+class Surveys(models.Model):
+  id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+  name = models.CharField(max_length=300)
+  survey_taker = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+  def get_absolute_url(self):
+    return reverse('survey-detail', args=[str(self.id)])
+
   def __str__(self):
     return self.name
