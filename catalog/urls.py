@@ -9,3 +9,8 @@ from django.conf.urls.static import static
 urlpatterns = [
   path('', views.index, name='index')
 ]
+
+urlpatterns += [
+  path('surveys/', views.SurveyListView.as_view(), name='survey-list'),
+  path('surveys/<int:pk>/', views.SurveyDetailView.as_view(), name='survey-detail')
+]
