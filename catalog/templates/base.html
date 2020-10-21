@@ -19,7 +19,7 @@
         <ul class="sidebar-nav">
         <!-- {% if user.is_authenticated %}{% else %}{% endif %} -->
           <li><a href='{% url 'index' %}'>Home</a>
-          <li>list one</li>
+          <li><a href='{% url 'surveys-list' %}'>Your Surveys</a></li>
           <li>list two</li>
         </ul>
       {% endblock %}

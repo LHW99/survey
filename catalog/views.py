@@ -9,10 +9,12 @@ from catalog.models import Answers, Questions, Surveys
 def index(request):
   return render(request, 'index.html')
 
-class SurveyListView(generic.ListView):
+class SurveysListView(generic.ListView):
   model = Surveys
   paginate_by = 10
 
-class SurveyDetailView(generic.DetailView):
+class SurveysDetailView(generic.DetailView):
   model = Surveys
 
+class QuestionsView(generic.View):
+  model = Questions

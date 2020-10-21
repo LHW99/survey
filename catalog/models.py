@@ -10,14 +10,14 @@ class Answers(models.Model):
   question = models.ForeignKey('Questions', on_delete=models.SET_NULL, null=True)
 
   def __str__(self):
-    return self.name
+    return self.answer
 
 class Questions(models.Model):
   question = models.CharField(max_length=300)
   survey = models.ForeignKey('Surveys', on_delete=models.SET_NULL, null=True)
 
   def __str__(self):
-    return self.name
+    return self.question
 
 class Surveys(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -25,7 +25,7 @@ class Surveys(models.Model):
   survey_taker = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
   def get_absolute_url(self):
-    return reverse('survey-detail', args=[str(self.id)])
+    return reverse('surveys-detail', args=[str(self.id)])
 
   def __str__(self):
     return self.name

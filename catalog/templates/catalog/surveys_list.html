@@ -2,10 +2,12 @@
 
 {% block content %}
 <h1>Surveys</h1>
-{% if survey_list %}
+{% if surveys_list %}
 <ul>
-  {% for survey in survey_list %}
-  <li><a href="{{ surveys.get_absolute_url }}">{{ surveys.name }}</a></li>
+  {% for survey in surveys_list %}
+  <li>
+  <a href="{{ survey.get_absolute_url }}">{{ survey.name }}</a>
+  </li>
   {% endfor %}
 {% else %}
   <p>You have no surveys.</p>

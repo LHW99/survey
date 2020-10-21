@@ -11,6 +11,9 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-  path('surveys/', views.SurveyListView.as_view(), name='survey-list'),
-  path('surveys/<int:pk>/', views.SurveyDetailView.as_view(), name='survey-detail')
+  path('surveys/', views.SurveysListView.as_view(), name='surveys-list'),
+  path('surveys/<uuid:pk>/', views.SurveysDetailView.as_view(), name='surveys-detail')
+]
+
+urlpatterns += [
 ]
