@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Surveys Online</h1>
+  <h1>{{ surveys.name }}</h1>
+  {% for ques in surveys.questions_set.all %}
+  <p>{{ ques.question }}</p>
+  <ul>
+  {% for ans in questions.answers_set.all %}
+  <li>{{ ans.answer }}</li>
+  {% endfor %}
+  {% endfor %}
 
-  <p>survey detail placeholder</p>
 {% endblock %}
