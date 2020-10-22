@@ -2,12 +2,15 @@
 
 {% block content %}
   <h1>{{ surveys.name }}</h1>
+  <ol>
   {% for ques in surveys.questions_set.all %}
-  <p>{{ ques.question }}</p>
-  <ul>
-  {% for ans in questions.answers_set.all %}
-  <li>{{ ans.answer }}</li>
+    <li>{{ ques.question }}
+    <ol type='a'>
+    {% for ans in ques.answers_set.all %}
+      <li>{{ ans.answer }}</li>
+    {% endfor %}
+    </li>
+    </ol><br>
   {% endfor %}
-  {% endfor %}
-
+  </ol>
 {% endblock %}
