@@ -1,0 +1,15 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: 20hwlee@gmail.com
+Date: Sat, 24 Oct 2020 06:24:42 -0000
+Message-ID: <160352068294.40029.16726367545083615171@haiduk-VirtualBox>
+
+A request has been sent to reset the password for 20hwlee@gmail.com.
+
+Follow the link below:
+
+http://127.0.0.1:8000/accounts/reset/MQ/ac8ht6-2fd896587d722a438ffe5cb11769570c/
+-------------------------------------------------------------------------------

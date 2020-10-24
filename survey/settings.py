@@ -123,4 +123,6 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# convenience that is not for production
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
