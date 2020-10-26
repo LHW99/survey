@@ -3,10 +3,6 @@ from .models import Questions, Answers, Surveys
 
 # Register your models here.
 
-
-
-
-
 class AnswersInline(admin.TabularInline):
   model = Answers
 

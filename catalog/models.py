@@ -24,6 +24,9 @@ class Surveys(models.Model):
   name = models.CharField(max_length=300)
   survey_taker = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
+  class Meta:
+    permissions = (('can_edit_survey', 'Edit Survey'),)
+
   def get_absolute_url(self):
     return reverse('surveys-detail', args=[str(self.id)])
 

@@ -17,6 +17,11 @@ urlpatterns += [
   path('surveys/<uuid:pk>/', views.SurveysDetailView.as_view(), name='surveys-detail')
 ]
 
+# user survey display pages
+urlpatterns += [
+  path('mysurveys/', views.UserSurveys.as_view(), name='user-surveys'),
+]
+
 # for log-ins and authentications
 urlpatterns += [
   path('accounts/', include('django.contrib.auth.urls'))

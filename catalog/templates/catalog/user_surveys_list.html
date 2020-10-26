@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Your Surveys</h1>
+
+  {% if surveys_list %}
+  <ul>
+    {% for surv in surveys_list %}
+    <li>
+      <a href='{% url 'surveys-detail' surv.pk %}'>{{surv.name}}</a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  {% else %}
+    <p>You have no surveys.</p>
+  {% endif %}
+{% endblock %}
