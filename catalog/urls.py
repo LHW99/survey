@@ -26,3 +26,10 @@ urlpatterns += [
 urlpatterns += [
   path('accounts/', include('django.contrib.auth.urls'))
 ]
+
+# for survey editors
+urlpatterns += [
+  path('surveys/create', views.SurveysCreate.as_view(), name='surveys-create'),
+  path('surveys/<uuid:pk>/update', views.SurveysUpdate.as_view(), name='surveys-update'),
+  path('surveys/<uuid:pk>/delete', views.SurveysDelete.as_view(), name='surveys-delete'),
+]

@@ -22,7 +22,7 @@ class Questions(models.Model):
 class Surveys(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4)
   name = models.CharField(max_length=300)
-  survey_taker = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+  surveyer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
   class Meta:
     permissions = (('can_edit_survey', 'Edit Survey'),)
