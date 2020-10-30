@@ -2,16 +2,19 @@
 
 {% block content %}
   <h1>{{ surveys.name }}</h1>
-  <ol>
-  {% for ques in surveys.questions_set.all %}
-    <li>{{ ques.question }}
-    <ol type='a'>
-    {% for ans in ques.answers_set.all %}
-      <li><input type='radio' name='ans' id='ans{{ forloop.counter }}' value='{{ ans.answer }}'></li>
-      <label for ='ans{{ forloop.counter }}'>{{ ans.answer }}</label>
+  <form>
+    <ol>
+    {% for ques in surveys.questions_set.all %}
+      <li>{{ ques.question }}
+      <ol type='a'>
+      {% for ans in ques.answers_set.all %}
+        <li><input type='radio' name='ans{{ ques.question }}' id='ans{{ forloop.counter }}' value='{{ ques.ans.answer }}'></li>
+        <label for ='ans{{ forloop.counter }}'>{{ ans.answer }}</label>
+      {% endfor %}
+      </li>
+      </ol><br>
     {% endfor %}
-    </li>
-    </ol><br>
-  {% endfor %}
-  </ol>
+    </ol>
+    <input type='submit' value='Submit'>
+  </form>
 {% endblock %}
