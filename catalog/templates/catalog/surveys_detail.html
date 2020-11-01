@@ -8,8 +8,8 @@
       <li>{{ ques.question }}
       <ol type='a'>
       {% for ans in ques.answers_set.all %}
-        <li><input type='radio' name='ans{{ ques.question }}' id='ans{{ forloop.counter }}' value='{{ ques.ans.answer }}'></li>
-        <label for ='ans{{ forloop.counter }}'>{{ ans.answer }}</label>
+        <li><input type='radio' name='ans{{ ques.question }}' id='ans{{ forloop.counter }}' value='{{ ques.ans.answer }}'>
+        <label for ='ans{{ forloop.counter }}'>{{ ans.answer }}</label></li>
       {% endfor %}
       </li>
       </ol><br>

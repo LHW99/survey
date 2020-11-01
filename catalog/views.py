@@ -30,14 +30,20 @@ class UserSurveys(LoginRequiredMixin, generic.ListView):
   def get_queryset(self):
     return Surveys.objects.filter(surveyer=self.request.user)
 
-class SurveysCreate(CreateView):
+class SurveysCreate(LoginRequiredMixin, CreateView):
   model = Surveys
-  fields = '__all__'
+  fields = ['name',]
 
-class SurveysUpdate(UpdateView):
+  def form_valid(self,form):
+    surveyer = self.request.user
+    form.instance.surveyer = surveyer
+    return super(SurveysCreate, self).form_valid(form)
+
+class SurveysUpdate(LoginRequiredMixin, UpdateView):
   model = Surveys
-  fields = '__all__'
+  fields = ['name',]
+  template = '/templates/catalog/surveys_update'
 
-class SurveysDelete(DeleteView):
+class SurveysDelete(LoginRequiredMixin, DeleteView):
   model = Surveys
   success_url = reverse_lazy('user-surveys')
