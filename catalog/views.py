@@ -6,9 +6,7 @@ from catalog.models import Answers, Questions, Surveys
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
-
-from django.forms.models import inlineformset_factory
-QuestionsFormset = inlineformset_factory(Surveys, Questions, fields=('question',))
+from .forms import QuestionsFormset, AnswersFormset
 
 # Create your views here.
 
@@ -36,6 +34,7 @@ class UserSurveys(LoginRequiredMixin, generic.ListView):
 class SurveysCreate(LoginRequiredMixin, CreateView):
   model = Surveys
   fields = ['name',]
+  success_url = '/catalog/surveys/'
 
   def get_context_data(self, *args, **kwargs):
     data = super().get_context_data(**kwargs)
@@ -49,18 +48,17 @@ class SurveysCreate(LoginRequiredMixin, CreateView):
     context = self.get_context_data()
     question = context['question']
     self.object = form.save()
+    surveyer = self.request.user
+    form.instance.surveyer = surveyer
     if question.is_valid():
       question.instance = self.object
       question.save()
     return super().form_valid(form)
   
-  def form_valid(self,form):
-    surveyer = self.request.user
-    form.instance.surveyer = surveyer
-    return super(SurveysCreate, self).form_valid(form)
-
-  def get_success_url(self):
-    return reverse('surveys:list')
+  #def form_valid(self,form):
+   # surveyer = self.request.user
+    #form.instance.surveyer = surveyer
+    #return super(SurveysCreate, self).form_valid(form)
 
 class SurveysUpdate(LoginRequiredMixin, UpdateView):
   model = Surveys
