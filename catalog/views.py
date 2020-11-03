@@ -62,7 +62,7 @@ class SurveysCreate(LoginRequiredMixin, CreateView):
 
 class SurveysUpdate(LoginRequiredMixin, UpdateView):
   model = Surveys
-  fields = ['name',]
+  fields = ('name',)
   template_name = 'surveys_update.html'
 
 class SurveysDelete(LoginRequiredMixin, DeleteView):
