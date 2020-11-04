@@ -34,7 +34,7 @@ class UserSurveys(LoginRequiredMixin, generic.ListView):
 class SurveysCreate(LoginRequiredMixin, CreateView):
   model = Surveys
   fields = ['name',]
-  success_url = '/catalog/surveys/'
+  success_url = '/catalog/surveys/create/<uuid:pk>/questions'
 
   def get_context_data(self, *args, **kwargs):
     data = super().get_context_data(**kwargs)
@@ -54,11 +54,32 @@ class SurveysCreate(LoginRequiredMixin, CreateView):
       question.instance = self.object
       question.save()
     return super().form_valid(form)
+
+  def post(self, request):
+    pk = request.POST.get('id')
+    return reverse_lazy()
+
+class QuestionsUpdate(LoginRequiredMixin, UpdateView):
+  model = Questions
+  fields = ('question',)
+  template_name = 'questions_update.html'
+
+  def get_context_data(self, *args, **kwargs):
+    data = super().get_context_data(**kwargs)
+    if self.request.POST:
+      data['answer'] = AnswersFormset(self.request.POST)
+    else:
+      data['answer'] = AnswersFormset()
+    return data
   
-  #def form_valid(self,form):
-   # surveyer = self.request.user
-    #form.instance.surveyer = surveyer
-    #return super(SurveysCreate, self).form_valid(form)
+  def form_valid(self, form):
+    context = self.get_context_data()
+    answer = context['answer']
+    self.object = form.save()
+    if answer.is_valid():
+      answer.instance = self.object
+      answer.save()
+    return super().form_valid(form)
 
 class SurveysUpdate(LoginRequiredMixin, UpdateView):
   model = Surveys

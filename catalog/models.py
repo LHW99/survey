@@ -21,7 +21,7 @@ class Questions(models.Model):
 
 class Surveys(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-  name = models.CharField(max_length=300)
+  name = models.CharField(max_length=300, blank=False)
   surveyer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, unique=False)
 
   class Meta:
