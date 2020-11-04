@@ -1,12 +1,13 @@
 import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.views import generic
 from catalog.models import Answers, Questions, Surveys
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
-from .forms import QuestionsFormset, AnswersFormset
+from .forms import QuestionsFormset, AnswersFormset, SurveysForm, QuestionsForm, AnswersForm
 
 # Create your views here.
 
@@ -34,35 +35,22 @@ class UserSurveys(LoginRequiredMixin, generic.ListView):
 class SurveysCreate(LoginRequiredMixin, CreateView):
   model = Surveys
   fields = ['name',]
-  success_url = '/catalog/surveys/create/<uuid:pk>/questions'
-
-  def get_context_data(self, *args, **kwargs):
-    data = super().get_context_data(**kwargs)
-    if self.request.POST:
-      data['question'] = QuestionsFormset(self.request.POST)
-    else:
-      data['question'] = QuestionsFormset()
-    return data
-  
-  def form_valid(self, form):
-    context = self.get_context_data()
-    question = context['question']
-    self.object = form.save()
-    surveyer = self.request.user
-    form.instance.surveyer = surveyer
-    if question.is_valid():
-      question.instance = self.object
-      question.save()
-    return super().form_valid(form)
+  template_name = 'surveys_form.html'
 
   def post(self, request):
-    pk = request.POST.get('id')
-    return reverse_lazy()
+    form = SurveysForm(request.POST)
+    if form.is_valid():
+      survey = form.save(commit=False)
+      survey.surveryer = request.user
+      return redirect('surveys-create2', pk=survey.id)
+    else:
+      form = SurveysForm()
+    return render(request, 'surveys_form.html', {'form': form})
 
-class QuestionsUpdate(LoginRequiredMixin, UpdateView):
+class SurveysCreate2(LoginRequiredMixin, UpdateView):
   model = Questions
   fields = ('question',)
-  template_name = 'questions_update.html'
+  template_name = 'surveys_form2.html'
 
   def get_context_data(self, *args, **kwargs):
     data = super().get_context_data(**kwargs)

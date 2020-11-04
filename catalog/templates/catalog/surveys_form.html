@@ -5,11 +5,12 @@
   <form action="" method="POST">
     {% csrf_token %}
     <table>
-    {{ form }}
-    </table><br>
-    <table>
-    <h2>Questions</h2>
-    {{ question }}
+      <tr>
+        <td>{{ form.name }}</td>
+      </tr>
+      <tr>
+        <td class='hidden'>{{ form.id }}</td>
+      </tr>
     </table>
     <input type="submit" value="Next">
   </form>

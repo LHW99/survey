@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Set Answers</h1>
+  <h1>Create Survey</h1>
   <form action="" method="POST">
     {% csrf_token %}
     <table>
-    {% for question in question.object.all %}
-      {{ answer }}
-    {% endfor %}
+    {{ form }}
     </table>
-    <input type="submit" value="Finalize">
+    <input type="submit" value="Next">
   </form>
 {% endblock %}  
